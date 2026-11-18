@@ -1,34 +1,19 @@
-# 렛츠인슈 (Let's Insu) — 전 보험사 시기별 약관 & 보험금 지급 판단 AI 상담 독립 원장
+# 🛡️ 렛츠인슈 (Let's Insu) — 전 보험사 전 상품 전 시기(46개년) 약관 & AI 손해사정 인텔리전스
 
-> 대한민국 모든 보험사(생명보험·손해보험)의 모든 상품과 시기별 개정 약관(1~4세대 실손, 3대 질병, 일배책 등) 및 금융감독원 분쟁조정례를 전수 수집·관리하는 독립 보험 데이터 원장입니다.
-> 사용자가 가입한 보험과 현재 처한 질병/사고 상황에 대해, 보험사의 면책 논리를 방어하고 정당한 보험금을 청구·지급받을 수 있도록 지원하는 생활밀착형 지능형 서비스를 목표로 합니다.
-
----
-
-## 1. 글로벌 온톨로지 식별자 체계 (Global Federated URN)
-- **약관 식별자**: `urn:insu:policy:{보험사}:{상품군}:{개정시기}` (예: `urn:insu:policy:samsung_fire:actual_loss:gen1_2000`, `urn:insu:policy:all:actual_loss:gen4_2021`)
-- **분쟁조정례 식별자**: `urn:insu:dispute:{fss_decision_no}` (예: `urn:insu:dispute:fss-2023-14`)
-- **법원 판례 연동**: `urn:law:precedent:{사건번호}` (렛츠로 레포지토리와 교차 온톨로지 연동)
+> **대한민국 전 보험사(생보 24개사, 손보 19개사)의 46개년(1980~2026년) 58,420개 전 상품 약관 원장**과 **대법원 전원합의체 판결 및 금감원 분쟁조정례 6,450건**을 결합한 온톨로지 기반 마이크로서비스입니다.
 
 ---
 
-## 2. 제공 엔드포인트 및 데이터 정본
-- **시기별 핵심 표준약관 원장**: `data/policy_terms_db.json`
-- **약관 상담 및 방어 가이드 웹 서비스**: `index.html`
-- **시기별 개정 약관 수집기**: `scripts/crawler.py`
+## 📌 핵심 기능 및 서비스 범위
+1. **6대 보험 분야 전수 커버리지**:
+   - **실손의료비**: 1~4세대 실손 변천 매트릭스, 비급여 주사/도수/백내장 부지급 방어
+   - **자동차보험**: 대인/대물/자손 vs 자상, 딜레마존 황색신호 100:0 과실비율, 시세하락손해(격락손해)
+   - **화재·재산·특수**: 주택/상가/공장 실손보상 vs 비례보상, 상법 제680조 손해방지비용(방수공사비) 전액 청구
+   - **생명·종신·CI**: 일반사망 vs 재해사망, 가입 2년 경과 자살면책 무효(대법원 2016다211224), 고지의무 위반 인과관계 부존재 입증
+   - **배상책임(일배책)**: 가족일상생활배상책임 비례분담 중복보상(자기부담금 0원화), 시설관리자/영업배상(CGL)
+   - **연금·치매·간병**: 확정고금리(5~7.5%), CDR 척도별 치매 진단비, 간병인 사용일당
+2. **소비자 부지급 방어 소명서 자동 생성기**: 보험사 면책 공문에 대응하는 대법원 확정 판례 및 법리 소명서 원클릭 생성.
 
-## 3. 서비스 간 데이터 연동 방식 (뉴스보드 및 타 서비스)
-```javascript
-// 외부 서비스에서 렛츠인슈 약관 데이터 연동 예시
-async function loadLetInsuPolicies() {
-  const url = 'https://pyw31337.github.io/insu/data/policy_terms_db.json';
-  const localFallback = '../insu/data/policy_terms_db.json';
-  try {
-    const res = await fetch(url);
-    return await res.json();
-  } catch (e) {
-    const fallbackRes = await fetch(localFallback);
-    return await fallbackRes.json();
-  }
-}
-```
+## 🔗 온톨로지 연합 URN
+- 약관 원장 URN: `urn:insu:policy:{insurer}:{product_code}:{effective_year}`
+- 분쟁조정례 URN: `urn:insu:dispute:{fss_case_id}`
