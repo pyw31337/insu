@@ -1,134 +1,265 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>렛츠인슈 (Let’s Insu) · 독립 AI 보험약관 & 분쟁조정 인텔리전스</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<style>
-:root{--bg:#f8fafc;--card:#ffffff;--text:#0f172a;--mute:#64748b;--primary:#047857;--green:#10b981;--line:#e2e8f0;--ok:#10b981;--warn:#f59e0b;--err:#ef4444}
-*{box-sizing:border-box;margin:0;padding:0;font-family:"Pretendard Variable",-apple-system,BlinkMacSystemFont,system-ui,sans-serif}
-body{background:var(--bg);color:var(--text);line-height:1.6;padding-bottom:3rem}
-.wrap{max-width:1120px;margin:0 auto;padding:0 1rem}
-header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
-.top-nav{display:flex;justify-content:space-between;align-items:center;height:60px}
-.brand{font-size:1.2rem;font-weight:800;color:var(--primary);text-decoration:none;display:flex;align-items:center;gap:6px}
-.brand span{color:var(--green)}
-.pill{display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:600}
-.pill-ok{background:#d1fae5;color:#065f46}
-.pill-green{background:#ecfdf5;color:#047857}
-.hero{background:linear-gradient(135deg,#065f46 0%,#047857 100%);color:#fff;padding:2.5rem 0;margin-bottom:1.5rem}
-.hero h1{font-size:1.8rem;margin-bottom:.5rem;font-weight:800}
-.hero p{font-size:.9rem;color:#a7f3d0;max-width:720px}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin-bottom:1.5rem}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.25rem;box-shadow:0 1px 3px rgba(0,0,0,.03)}
-.card h2{font-size:1.05rem;font-weight:700;margin-bottom:.75rem;color:var(--primary);display:flex;align-items:center;gap:6px}
-.tab-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px}
-.tab-btn{background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:.78rem;font-weight:600;cursor:pointer;white-space:nowrap}
-.tab-btn.on{background:#047857;color:#fff;border-color:#047857}
-.term-detail{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:14px}
-.defense-box{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px;margin-top:10px}
-.back-link{font-size:.78rem;color:var(--mute);text-decoration:none}
-.back-link:hover{color:var(--primary)}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>렛츠인슈 (Let's Insu) — 전 보험사 약관 & 보험금 지급상담 AI 가이드</title>
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --card-bg: rgba(19, 26, 44, 0.85);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --primary: #3b82f6;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Pretendard", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    header {
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    h1 { font-size: 26px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+    .badge {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    h2 { font-size: 18px; margin-bottom: 16px; color: var(--emerald); display: flex; align-items: center; gap: 8px; }
+    .form-group { margin-bottom: 16px; }
+    label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    select {
+      width: 100%;
+      padding: 11px 14px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 14px;
+    }
+    .defense-box {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+    .defense-title { font-size: 13px; font-weight: 700; color: var(--emerald); margin-bottom: 6px; }
+    .warning-box {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 13px;
+      color: #fda4af;
+    }
+    .policy-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 16px; }
+    .tab-btn {
+      padding: 8px 14px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      font-weight: 600;
+    }
+    .detail-card {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .detail-row { margin-bottom: 12px; }
+    .detail-label { font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+    .detail-text { font-size: 14px; }
+  </style>
 </head>
 <body>
-<header>
-  <div class="wrap top-nav">
-    <a href="./" class="brand">🛡️ 렛츠인슈 <span>Let’s Insu</span> <span class="pill pill-ok">독립 서비스 v1</span></a>
-    <div>
-      <a href="../" class="back-link">← 뉴스보드 코어로 이동</a>
-    </div>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="wrap">
-    <span class="pill pill-green" style="background:#10b981;color:#fff;margin-bottom:8px">금융감독원 분쟁조정위원회 & 대법원 판례 연동</span>
-    <h1>생활밀착형 보험약관 분석 & 부지급 방어 가이드</h1>
-    <p>4세대 실손의료비, 3대 질병(암/뇌혈관/허혈성심장), 일상생활배상책임 등 7대 핵심 표준약관과 KCD 질병코드, 금감원 분쟁조정례를 1:1 매핑하여 보험금 청구 및 보험사 면책 방어 전략을 제공합니다.</p>
-  </div>
-</section>
-
-<main class="wrap">
-  <div class="card" style="margin-bottom:1.5rem">
-    <h2>📑 7대 핵심 표준약관 & 부지급 방어 온톨로지</h2>
-    <div class="tab-row" id="term-tabs"></div>
-    <div id="term-content">
-      <p style="color:var(--mute);font-size:.85rem">약관 데이터를 로드하는 중입니다...</p>
-    </div>
-  </div>
-</main>
-
-<script>
-let policyData = null;
-let curTab = 0;
-
-async function init() {
-  try {
-    const res = await fetch('../data/insu/policy_terms_db.json');
-    policyData = await res.json();
-    renderTabs();
-    renderContent();
-  } catch (err) {
-    document.getElementById('term-content').innerHTML = '<p style="color:#ef4444;font-size:.85rem">약관 데이터를 로드할 수 없습니다.</p>';
-  }
-}
-
-function getTerms() {
-  return (policyData && (policyData.policies || policyData.terms)) || [];
-}
-
-function renderTabs() {
-  const tabs = document.getElementById('term-tabs');
-  const terms = getTerms();
-  tabs.innerHTML = terms.map((t, i) => `
-    <button class="tab-btn ${i===curTab?'on':''}" onclick="setTab(${i})">${(t.policy_name || t.name || '').split('(')[0]}</button>
-  `).join('');
-}
-
-function setTab(idx) {
-  curTab = idx;
-  renderTabs();
-  renderContent();
-}
-
-function renderContent() {
-  const box = document.getElementById('term-content');
-  const terms = getTerms();
-  const item = terms[curTab];
-  if (!item) return;
-
-  const exList = (item.exclusion_clauses || []).map(e => `• <b>${e.clause || ''}</b>: ${e.item || e.description || ''}`).join('<br>') || item.exclusion_clause || '의학적 소견 및 치료 목적성 불인정';
-  const dpList = (item.dispute_cases || []).map(d => `
-    <div style="margin-top:6px;border-top:1px dashed #bfdbfe;padding-top:6px">
-      <b>[${d.dispute_no || '금감원 분조위'}]</b> ${d.issue || ''}<br>
-      <span style="color:#1e3a8a;font-weight:600">방어 전략: ${d.defense_strategy || ''}</span>
-    </div>
-  `).join('') || item.defense_strategy || '';
-
-  box.innerHTML = `
-    <div class="term-detail">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
-        <h3 style="font-size:1.05rem;color:#065f46">${item.policy_name || item.name}</h3>
-        <span class="pill pill-ok">${item.coverage_category || '표준약관 개정판'}</span>
+  <div class="container">
+    <header>
+      <div>
+        <h1>🛡️ 렛츠인슈 (Let's Insu) <span class="badge">독립 원장 v1</span></h1>
+        <p style="color: var(--muted); font-size: 14px; margin-top: 4px;">전 보험사 1~4세대 실손 변천 약관 & 질병/사고 맞춤형 보험금 지급상담 AI 가이드</p>
       </div>
-      <p style="font-size:.82rem;color:var(--mute);margin-bottom:10px">${item.summary || ''}</p>
-      
-      <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:10px">
-        <h4 style="font-size:.85rem;color:#b91c1c;margin-bottom:6px">⚠️ 보험사 주요 면책 주장 사유</h4>
-        <div style="font-size:.78rem;color:#475569;line-height:1.5">${exList}</div>
+    </header>
+
+    <div class="grid">
+      <!-- 좌측: 질병/사고 맞춤형 보험금 지급 판단 가이드 -->
+      <div class="card">
+        <h2>🩺 내 보험금 지급 판단 & 면책 방어 자가진단</h2>
+
+        <div class="form-group">
+          <label>1. 내가 가입한 보험 종류 및 시기</label>
+          <select id="selGen">
+            <option value="gen1">1세대 구실손 (2009년 9월 이전 가입 - 자기부담 0원)</option>
+            <option value="gen2">2세대 표준화 실손 (2009년 10월 ~ 2017년 3월 가입)</option>
+            <option value="gen3">3세대 착한실손 (2017년 4월 ~ 2021년 6월 가입)</option>
+            <option value="gen4">4세대 실손 (2021년 7월 ~ 현재 판매 중)</option>
+            <option value="cancer">3대 질병 암보험 (원발암 vs 전이암)</option>
+            <option value="leak">일상생활배상책임 (아파트 누수 사고)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>2. 현재 처한 질병/치료 및 사고 상황</label>
+          <select id="selCase">
+            <option value="cataract">백내장 다초점 인공수정체 삽입술 시행</option>
+            <option value="chiro">도수치료 및 체외충격파 20회 이상 지속 시행</option>
+            <option value="lymph_cancer">갑상선암 수술 후 경부 림프절 전이(C77) 진단</option>
+            <option value="pipe_leak">우리 집 배관 누수로 아래층 천장 누수 및 피해 발생</option>
+            <option value="brain_infarct">MRI 검사상 열공성 뇌경색 흔적 및 뇌혈관 협착(I67) 소견</option>
+          </select>
+        </div>
+
+        <div class="warning-box" id="boxWarning">
+          ⚠️ <strong>보험사 예상 면책 주장</strong>: 6시간 이상 낮병동 입원 치료의 실질적 필요성이 결여되었으며, 단순 시력교정 목적 시술에 해당한다고 주장하며 입원의료비(5천만원 한도) 지급 거절 가능성 농후.
+        </div>
+
+        <div class="defense-box" id="boxDefense">
+          <div class="defense-title">💡 소비자 부지급 방어 전략 및 승소 판례</div>
+          <p id="defenseText" style="font-size: 14px; white-space: pre-line;">
+            1. 대법원 2022다216749 판결에 따라 단순 20분 수술 후 퇴원 시 통원의료비(20~30만원)로 삭감되므로, 반드시 6시간 이상 낮병동 관찰 기록 및 합병증 투약 활력징후(BP, Pulse) 차트 원본 확보 필수.
+            2. 세극등현미경 검사 결과지상 LOCS III 3단계 이상 혼탁도가 명시된 객관적 검사지 첨부 시 보험금 전액 수령 가능.
+          </p>
+        </div>
       </div>
 
-      <div class="defense-box">
-        <h4 style="font-size:.85rem;color:#1e40af;margin-bottom:6px">🛡️ 소비자 승소 및 부지급 방어 전략 (금감원 분쟁조정례)</h4>
-        <div style="font-size:.78rem;color:#1e3a8a;line-height:1.5">${dpList}</div>
+      <!-- 우측: 7개 핵심 표준약관 시기별 상세 아카이브 -->
+      <div class="card">
+        <h2>📜 시기별 표준약관 & 분쟁조정례 아카이브</h2>
+        <div class="policy-tabs" id="tabContainer"></div>
+        <div class="detail-card" id="detailCard">
+          <p style="color: var(--muted)">약관 데이터를 로드하는 중입니다...</p>
+        </div>
       </div>
     </div>
-  `;
-}
+  </div>
 
-init();
-</script>
+  <script>
+    let policies = [];
+
+    const CONSULT_MAP = {
+      'cataract': {
+        warning: '⚠️ 보험사 예상 면책 주장: 단순 시력교정 목적 백내장 수술이거나 6시간 입원 요건 미충족으로 입원의료비 부지급 주장.',
+        defense: '1. 세극등현미경 혼탁도 3단계 이상 결과지 확보.\n2. 낮병동 6시간 이상 체류 차트 및 활력징후 측정지 필수 제출.\n3. 대법원 2022다216749 판례상 의학적 필요성 입증 시 입원의료비 청구 권리 유지.'
+      },
+      'chiro': {
+        warning: '⚠️ 보험사 예상 면책 주장: 질병 치료 목적이 아닌 체형교정/예방 관리 목적 과잉진료로 규정하여 10회 또는 20회 초과분 지급 거부.',
+        defense: '1. 매 10회 단위로 X-ray 영상 판독지 및 통증 척도(VAS 점수) 호전 소견서 차트 확보.\n2. 금감원 분쟁조정위 결정례에 따라 객관적 관절가동범위(ROM) 개선 기록이 있으면 실손 전액 보상 가능.'
+      },
+      'lymph_cancer': {
+        warning: '⚠️ 보험사 예상 면책 주장: 2011년 4월 개정 표준약관의 원발부위 분류 원칙에 따라 갑상선암(소액암) 기준 10~20%만 지급 통보.',
+        defense: '1. 가입 시점이 2011년 3월 이전이면 대법원 판례상 무조건 일반암 100% 지급.\n2. 2011년 4월 이후 가입이라도 청약 당시 원발부위 약관 설명의무를 위반했으면 상법 제638조의3에 따라 일반암 전액 청구 승소.'
+      },
+      'pipe_leak': {
+        warning: '⚠️ 보험사 예상 면책 주장: 우리 집 배관 공사비는 타인의 손해가 아니므로 보상 제외 통보.',
+        defense: '1. 대법원 2019다282218 판례: 아래층 피해 확산을 막기 위한 자택 방수공사비는 상법 제680조 "손해방지비용"에 해당하여 보험사 전액 부담 의무 확정.'
+      },
+      'brain_infarct': {
+        warning: '⚠️ 보험사 예상 면책 주장: 과거 가입 보험이 뇌출혈 전용 특약이라 뇌경색(I63) 또는 협착(I67)은 부지급 주장.',
+        defense: '1. MRI 판독지상 미세 뇌실질 출혈(Microbleed) 소견 유무 확인 후 전문의 질병코드 재판독 의뢰.\n2. 금감원 조정례상 신경학적 결손 증상이 동반된 열공성 뇌경색 인정 추진.'
+      }
+    };
+
+    async function loadPolicies() {
+      try {
+        const res = await fetch('data/policy_terms_db.json');
+        const data = await res.json();
+        policies = data.policies || [];
+        renderTabs();
+        if (policies.length) showDetail(0);
+      } catch (e) {
+        document.getElementById('detailCard').innerHTML = '<p style="color:#ef4444">약관 데이터를 불러올 수 없습니다.</p>';
+      }
+    }
+
+    function renderTabs() {
+      const tc = document.getElementById('tabContainer');
+      tc.innerHTML = policies.map((p, idx) => `
+        <button class="tab-btn ${idx === 0 ? 'active' : ''}" onclick="selectTab(${idx})">${p.category.split(' ')[0]}</button>
+      `).join('');
+    }
+
+    function selectTab(idx) {
+      document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+      showDetail(idx);
+    }
+
+    function showDetail(idx) {
+      const p = policies[idx];
+      if (!p) return;
+      document.getElementById('detailCard').innerHTML = `
+        <div class="detail-row">
+          <div class="detail-label">적용 시기 & 대상 보험사</div>
+          <div class="detail-text" style="color:var(--emerald); font-weight:700;">${p.category} (${p.effective_period || '전 기간'})</div>
+          <div style="font-size:12px; color:var(--muted);">${p.insurer_coverage || ''}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">핵심 보장 내용</div>
+          <div class="detail-text">${p.key_coverage || ''}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label" style="color:#fda4af;">보험사 면책 주장 논리</div>
+          <div class="detail-text" style="color:#fca5a5;">${p.insurer_defense || ''}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label" style="color:var(--emerald);">대법원 승소 판례 & 금감원 조정례</div>
+          <div class="detail-text">${p.court_precedent || ''}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label" style="color:var(--amber);">소비자 부지급 방어 가이드</div>
+          <div class="detail-text" style="white-space:pre-line;">${p.consumer_defense || ''}</div>
+        </div>
+      `;
+    }
+
+    function updateConsult() {
+      const cKey = document.getElementById('selCase').value;
+      const c = CONSULT_MAP[cKey] || CONSULT_MAP['cataract'];
+      document.getElementById('boxWarning').innerHTML = c.warning;
+      document.getElementById('defenseText').textContent = c.defense;
+    }
+
+    document.getElementById('selCase').addEventListener('change', updateConsult);
+    document.getElementById('selGen').addEventListener('change', updateConsult);
+
+    loadPolicies();
+    updateConsult();
+  </script>
 </body>
 </html>
