@@ -325,19 +325,20 @@
         
         <div class="category-chips" id="catChips">
           <button class="cat-btn active" onclick="switchCategory('auto_insurance')">🚗 자동차보험</button>
+          <button class="cat-btn" style="border-color:var(--cyan); color:var(--cyan);" onclick="switchCategory('traffic_settlement')">🧮 교통사고 과실비율 & 합의금 계산기</button>
           <button class="cat-btn" onclick="switchCategory('fire_property')">🔥 화재·누수·재산</button>
           <button class="cat-btn" onclick="switchCategory('life_whole')">🖤 생명·종신·사망</button>
           <button class="cat-btn" onclick="switchCategory('indemnity_health')">🏥 실손·암·질병</button>
           <button class="cat-btn" onclick="switchCategory('liability')">🛡️ 일상생활배상(일배책)</button>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="grpScenario">
           <label id="lblScenario">분쟁 시나리오 선택</label>
           <select id="selScenario" onchange="renderScenarioDetail()"></select>
         </div>
 
         <!-- 손해사정 지급 승소 확률 게이지 -->
-        <div class="gauge-container">
+        <div class="gauge-container" id="grpGauge">
           <div style="display:flex; justify-content:space-between; font-size:13px;">
             <span style="font-weight:700;">소비자 보험금 전액 수령 확률</span>
             <span style="color:var(--emerald); font-weight:800;" id="txtProb">92% (승소 유력)</span>
@@ -359,6 +360,56 @@
         <div class="defense-box" id="boxDefense">
           <div class="defense-title">💡 소비자 승소 방어 전략 & 필수 제출 서류</div>
           <p id="defenseText" style="font-size: 14px; white-space: pre-line;"></p>
+        </div>
+
+        <!-- 교통사고 합의금 계산기 패널 -->
+        <div id="trafficSettlementPanel" style="display:none;">
+          <div style="background:rgba(6,182,212,0.1); border:1px solid var(--cyan); border-radius:10px; padding:16px; margin-bottom:14px;">
+            <div style="font-weight:800; color:var(--cyan); margin-bottom:4px; font-size:15px;">🚗 한문철식 과실비율 & 합의금 산출 엔진</div>
+            <div style="font-size:12px; color:#cbd5e1;">대법원 판례 및 자동차보험 표준약관(지급기준)에 따른 위자료, 휴업손해(85%), 향후치료비 정밀 시뮬레이션</div>
+          </div>
+
+          <div class="form-group">
+            <label>1. 본인 과실비율: <b id="lblMyFault" style="color:var(--amber);">30%</b> (상대 과실: <b id="lblOtherFault" style="color:var(--cyan);">70%</b>)</label>
+            <input type="range" id="rngFault" min="0" max="100" value="30" step="5" style="width:100%;" oninput="calcSettlement()">
+          </div>
+
+          <div class="form-group" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <div>
+              <label>2. 상해 급수 (부상 정도)</label>
+              <select id="selInjuryGrade" onchange="calcSettlement()">
+                <option value="15">12~14급 (염좌/타박상 전치 2~3주 - 위자료 15만)</option>
+                <option value="50">9~11급 (골절/파열 전치 4~6주 - 위자료 50만)</option>
+                <option value="120">5~8급 (중상해/수술 전치 8~12주 - 위자료 120만)</option>
+                <option value="200">1~4급 (중증 후유장해/생명위험 - 위자료 200만)</option>
+              </select>
+            </div>
+            <div>
+              <label>3. 월 평균 소득 (세전)</label>
+              <input type="number" id="inpIncome" value="3500000" step="100000" oninput="calcSettlement()">
+            </div>
+          </div>
+
+          <div class="form-group" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <div>
+              <label>4. 입원 일수 (일)</label>
+              <input type="number" id="inpInpatient" value="7" min="0" max="365" oninput="calcSettlement()">
+            </div>
+            <div>
+              <label>5. 통원 일수 (일)</label>
+              <input type="number" id="inpOutpatient" value="14" min="0" max="365" oninput="calcSettlement()">
+            </div>
+          </div>
+
+          <!-- 실시간 합의금 산출 결과 -->
+          <div style="background:rgba(0,0,0,0.45); border:1px solid rgba(16,185,129,0.3); border-radius:10px; padding:16px; margin-top:14px;">
+            <div style="font-size:12px; color:var(--muted); font-weight:600;">과실상계 후 총 예상 실수령 합의금</div>
+            <div style="font-size:26px; font-weight:800; color:var(--emerald); margin:6px 0;" id="txtTotalSettlement">2,380,000 원</div>
+            <div style="font-size:12px; color:#cbd5e1; line-height:1.6;" id="txtSettlementBreakdown"></div>
+            <a href="https://pyw31337.github.io/law/" target="_blank" style="display:block; text-align:center; margin-top:12px; background:linear-gradient(135deg, rgba(59,130,246,0.2), rgba(37,99,235,0.25)); border:1px solid var(--primary); color:#93c5fd; padding:8px; border-radius:6px; font-weight:700; font-size:12px; text-decoration:none;">
+              ⚖️ 렛츠로(Let's Law) 3D 현장 시뮬레이터 & 한문철식 과실비율 평가기 바로가기
+            </a>
+          </div>
         </div>
       </div>
 
@@ -405,7 +456,55 @@
       document.querySelectorAll('.cat-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('onclick').includes(cat));
       });
-      renderCategoryScenarios();
+
+      const isSettlement = cat === 'traffic_settlement';
+      document.getElementById('trafficSettlementPanel').style.display = isSettlement ? 'block' : 'none';
+      document.getElementById('grpScenario').style.display = isSettlement ? 'none' : 'block';
+      document.getElementById('grpGauge').style.display = isSettlement ? 'none' : 'block';
+      document.getElementById('boxWarning').style.display = isSettlement ? 'none' : 'block';
+      document.getElementById('boxPrecedent').style.display = isSettlement ? 'none' : 'block';
+      document.getElementById('boxDefense').style.display = isSettlement ? 'none' : 'block';
+
+      if (isSettlement) {
+        calcSettlement();
+      } else {
+        renderCategoryScenarios();
+      }
+    }
+
+    function calcSettlement() {
+      const myFault = parseInt(document.getElementById('rngFault').value) || 0;
+      const otherRatio = (100 - myFault) / 100;
+      document.getElementById('lblMyFault').textContent = `${myFault}%`;
+      document.getElementById('lblOtherFault').textContent = `${100 - myFault}%`;
+
+      const baseInjuryVal = parseInt(document.getElementById('selInjuryGrade').value) * 10000; // 위자료 기본
+      const monthlyIncome = parseFloat(document.getElementById('inpIncome').value) || 3500000;
+      const dailyIncome = monthlyIncome / 30;
+      const inDays = parseInt(document.getElementById('inpInpatient').value) || 0;
+      const outDays = parseInt(document.getElementById('inpOutpatient').value) || 0;
+
+      // 1. 위자료 (과실상계 적용)
+      const adjustedInjury = Math.round(baseInjuryVal * otherRatio);
+
+      // 2. 휴업손해 (입원일수 * 일소득 * 85% * 과실상계)
+      const lostWages = Math.round(inDays * dailyIncome * 0.85 * otherRatio);
+
+      // 3. 통원교통비 (1일 8,000원 * 과실상계)
+      const transport = Math.round(outDays * 8000 * otherRatio);
+
+      // 4. 향후치료비 추정액 (부상등급과 입통원 감안 표준치)
+      const futureMed = Math.round((baseInjuryVal * 1.8 + inDays * 120000 + outDays * 45000) * otherRatio);
+
+      const total = adjustedInjury + lostWages + transport + futureMed;
+
+      document.getElementById('txtTotalSettlement').textContent = `${total.toLocaleString()} 원`;
+      document.getElementById('txtSettlementBreakdown').innerHTML = `
+        • <b>부상 위자료:</b> ${adjustedInjury.toLocaleString()}원 (기준액 ${baseInjuryVal.toLocaleString()}원의 ${Math.round(otherRatio*100)}%)<br>
+        • <b>휴업손해 (입원 ${inDays}일):</b> ${lostWages.toLocaleString()}원 (일 소득 ${Math.round(dailyIncome).toLocaleString()}원 × 85% × ${Math.round(otherRatio*100)}%)<br>
+        • <b>통원 교통비 (${outDays}회):</b> ${transport.toLocaleString()}원 (회당 8,000원 기준)<br>
+        • <b>향후 치료비 추정액:</b> ${futureMed.toLocaleString()}원 (합의 후 잔여 물리치료 및 약제비)
+      `;
     }
 
     function renderCategoryScenarios() {
