@@ -3,259 +3,405 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0b0f19">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="https://pyw31337.github.io/lets/css/lets-design-system.css?v=1.1.0">
-  <title>렛츠인슈 (Let's Insu) — 대한민국 전 보험사 46개년 전수 약관 & AI 손해사정 인텔리전스</title>
+  <meta name="theme-color" content="#f8fafc">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>렛츠인슈 (Let's Insu) v3.0.0 — 대한민국 전 보험사 46개년 전수 약관 & AI 손해사정 인텔리전스 (LDS v1.0.0)</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="css/lets-design-system.css">
   <style>
-    :root {
-      --bg: #0b0f19;
-      --card-bg: rgba(20, 27, 45, 0.85);
-      --card-hover: rgba(28, 38, 65, 0.95);
-      --border: rgba(255, 255, 255, 0.08);
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --primary: #3b82f6;
-      --emerald: #10b981;
-      --amber: #f59e0b;
-      --rose: #f43f5e;
-      --cyan: #06b6d4;
-      --purple: #a855f7;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Pretendard Variable", -apple-system, BlinkMacSystemFont, sans-serif; }
     body {
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      padding: 20px;
+      background: var(--bg-page);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      min-width: 320px;
     }
-    .container { max-width: 1320px; margin: 0 auto; }
-    
-    /* 헤더 */
-    header {
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
+
+    .insu-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Top Header */
+    .insu-header {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-20) var(--space-24);
+      margin-bottom: var(--space-24);
+      box-shadow: var(--shadow-sm);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: var(--space-16);
       flex-wrap: wrap;
-      gap: 16px;
     }
-    .brand h1 { font-size: 24px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
-    .badge {
-      background: rgba(16, 185, 129, 0.18);
-      color: var(--emerald);
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 600;
-      border: 1px solid rgba(16, 185, 129, 0.3);
+    @media (max-width: 768px) {
+      .insu-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--space-16);
+      }
     }
-    .pulse-tag {
-      background: rgba(59, 130, 246, 0.15);
-      color: #60a5fa;
-      padding: 4px 10px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: var(--space-16);
+    }
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #ffffff;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+      flex-shrink: 0;
+    }
+    .brand-title {
+      font-size: var(--fs-xl);
+      font-weight: var(--fw-extrabold);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      flex-wrap: wrap;
+    }
+    .brand-subtitle {
+      font-size: var(--fs-sm);
+      color: var(--text-muted);
+      margin-top: var(--space-4);
+      line-height: var(--lh-snug);
     }
 
-    /* 1. 실시간 수집 관제 펄스 보드 (전 분야 전수) */
+    /* Pulse Panel */
     .pulse-panel {
-      background: linear-gradient(135deg, rgba(10, 24, 30, 0.95), rgba(15, 30, 45, 0.8));
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 24px;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--space-24);
+      margin-bottom: var(--space-24);
+      box-shadow: var(--shadow-sm);
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-16);
+    }
+    @media (max-width: 1024px) {
+      .pulse-panel { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 639px) {
+      .pulse-panel { grid-template-columns: 1fr; padding: var(--space-16); }
     }
     .pulse-stat {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--space-16);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      transition: all var(--transition-fast);
     }
-    .pulse-label { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
-    .pulse-val { font-size: 22px; font-weight: 800; color: #fff; display: flex; align-items: baseline; gap: 6px; }
-    .pulse-unit { font-size: 13px; font-weight: 500; color: var(--muted); }
-    .pulse-rate { font-size: 12px; color: var(--emerald); margin-top: 4px; font-weight: 600; }
+    .pulse-stat:hover {
+      background: #ffffff;
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    .pulse-label {
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-bold);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .pulse-val {
+      font-size: var(--fs-2xl);
+      font-weight: var(--fw-extrabold);
+      color: var(--text-primary);
+    }
+    .pulse-unit {
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-medium);
+      color: var(--text-muted);
+    }
+    .pulse-rate {
+      font-size: 11px;
+      font-weight: var(--fw-bold);
+      color: var(--color-insu);
+      margin-top: auto;
+    }
 
-    /* 모니터링 & 자동 대응 알림 바 */
-    .health-bar {
+    .health-strip {
       grid-column: 1 / -1;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-size: 13px;
+      background: linear-gradient(90deg, #ecfdf5 0%, #eff6ff 100%);
+      border: 1px solid #a7f3d0;
+      padding: var(--space-12) var(--space-16);
+      border-radius: var(--radius-md);
+      font-size: var(--fs-xs);
+      flex-wrap: wrap;
+      gap: var(--space-8);
     }
-    .status-indicator { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--emerald); }
-    .dot { width: 8px; height: 8px; background: var(--emerald); border-radius: 50%; box-shadow: 0 0 8px var(--emerald); }
+    @media (max-width: 639px) {
+      .health-strip { flex-direction: column; align-items: flex-start; }
+    }
 
-    /* 2. 제품 스펙 & 차별화 데이터 소개 섹션 */
-    .spec-panel {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px;
-      margin-bottom: 24px;
+    /* Category Chips Carousel */
+    .category-carousel {
+      display: flex;
+      gap: var(--space-8);
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: var(--space-20);
+      padding-bottom: 2px;
+      cursor: grab;
+      user-select: none;
     }
-    .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; margin-top: 14px; }
-    .spec-box {
-      background: rgba(0, 0, 0, 0.25);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-    }
-    .spec-title { font-size: 14px; font-weight: 700; color: var(--cyan); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-    .spec-desc { font-size: 13px; color: #cbd5e1; line-height: 1.6; }
-
-    /* 3. 메인 인터랙티브 작업 영역 */
-    .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; }
-    @media (max-width: 950px) { .grid { grid-template-columns: 1fr; } }
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 24px;
-      backdrop-filter: blur(10px);
-    }
-    h2 { font-size: 18px; margin-bottom: 16px; color: var(--emerald); display: flex; align-items: center; gap: 8px; }
-    .category-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+    .category-carousel::-webkit-scrollbar { display: none !important; width: 0; height: 0; }
     .cat-btn {
-      padding: 8px 16px;
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--muted);
+      padding: var(--space-10) var(--space-16);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-strong);
+      background: #ffffff;
+      color: var(--text-secondary);
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-bold);
       cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      transition: all 0.2s;
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-6);
+      flex-shrink: 0;
     }
-    .cat-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+    .cat-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
     .cat-btn.active {
-      background: var(--emerald);
-      color: #0b0f19;
-      border-color: var(--emerald);
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      background: var(--color-insu);
+      color: #ffffff;
+      border-color: var(--color-insu);
+      box-shadow: var(--shadow-sm);
     }
-    
-    .form-group { margin-bottom: 16px; }
-    label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #cbd5e1; }
-    select, input[type="number"] {
-      width: 100%;
-      padding: 11px 14px;
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-size: 14px;
-      outline: none;
-    }
-    select:focus, input:focus { border-color: var(--emerald); }
 
-    /* 손해사정 판정 게이지 */
+    /* Main Grid */
+    .insu-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: var(--space-24);
+      margin-bottom: var(--space-32);
+    }
+    @media (max-width: 960px) {
+      .insu-grid { grid-template-columns: 1fr; }
+    }
+
+    .insu-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-24);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+    @media (max-width: 639px) {
+      .insu-card { padding: var(--space-16); }
+    }
+    .insu-card h2 {
+      font-size: var(--fs-lg);
+      font-weight: var(--fw-extrabold);
+      color: var(--text-primary);
+      margin-bottom: var(--space-16);
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-16);
+    }
+    .form-group label {
+      display: block;
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-bold);
+      color: var(--text-secondary);
+      margin-bottom: var(--space-6);
+    }
+
+    .lds-select, .lds-input-field {
+      width: 100%;
+      padding: var(--space-12) var(--space-16);
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: var(--fs-sm);
+      font-family: inherit;
+      outline: none;
+      transition: all var(--transition-fast);
+      min-height: 44px;
+    }
+    .lds-select:focus, .lds-input-field:focus {
+      border-color: var(--color-insu);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
+    }
+
+    /* Gauge Container */
     .gauge-container {
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 10px;
-      padding: 16px;
-      margin-top: 14px;
-      border: 1px solid var(--border);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--space-16);
+      margin-top: var(--space-14);
     }
     .gauge-bar-bg {
       height: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 5px;
+      background: #e2e8f0;
+      border-radius: var(--radius-full);
       overflow: hidden;
-      margin: 8px 0;
+      margin: var(--space-8) 0;
     }
     .gauge-bar-fill {
       height: 100%;
-      width: 88%;
-      background: linear-gradient(90deg, #10b981, #3b82f6);
-      border-radius: 5px;
-      transition: width 0.5s;
+      background: linear-gradient(90deg, #10b981, #059669);
+      border-radius: var(--radius-full);
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .defense-box {
-      background: rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      border-radius: 10px;
-      padding: 18px;
-      margin-top: 18px;
-    }
-    .defense-title { font-size: 13px; font-weight: 700; color: var(--emerald); margin-bottom: 6px; }
     .warning-box {
-      background: rgba(244, 63, 94, 0.08);
-      border: 1px solid rgba(244, 63, 94, 0.25);
-      border-radius: 8px;
-      padding: 12px;
-      margin-top: 10px;
-      font-size: 13px;
-      color: #fda4af;
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-radius: var(--radius-md);
+      padding: var(--space-12) var(--space-16);
+      margin-top: var(--space-12);
+      font-size: var(--fs-xs);
+      color: #9f1239;
+      line-height: var(--lh-snug);
     }
     .precedent-box {
-      background: rgba(59, 130, 246, 0.08);
-      border: 1px solid rgba(59, 130, 246, 0.25);
-      border-radius: 8px;
-      padding: 12px;
-      margin-top: 10px;
-      font-size: 13px;
-      color: #93c5fd;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius-md);
+      padding: var(--space-12) var(--space-16);
+      margin-top: var(--space-12);
+      font-size: var(--fs-xs);
+      color: #1e40af;
+      line-height: var(--lh-snug);
     }
-    .policy-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 16px; }
-    .tab-btn {
-      padding: 8px 14px;
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--muted);
+    .defense-box {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      border-radius: var(--radius-md);
+      padding: var(--space-16);
+      margin-top: var(--space-16);
+    }
+    .defense-title {
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-bold);
+      color: #065f46;
+      margin-bottom: var(--space-6);
+    }
+
+    /* Policy Tabs */
+    .policy-tabs-wrap {
+      display: flex;
+      gap: var(--space-8);
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin-bottom: var(--space-16);
+      padding-bottom: 2px;
+    }
+    .policy-tabs-wrap::-webkit-scrollbar { display: none; }
+    .policy-tab-chip {
+      padding: var(--space-6) var(--space-12);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      background: #ffffff;
+      color: var(--text-secondary);
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-bold);
       cursor: pointer;
-      font-size: 13px;
       white-space: nowrap;
-      transition: all 0.2s;
+      transition: all var(--transition-fast);
     }
-    .tab-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
-    .tab-btn.active {
-      background: var(--emerald);
-      color: #0b0f19;
-      border-color: var(--emerald);
-      font-weight: 700;
+    .policy-tab-chip.active {
+      background: var(--text-primary);
+      color: #ffffff;
+      border-color: var(--text-primary);
     }
+
     .detail-card {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--space-16);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-12);
     }
-    .detail-row { margin-bottom: 12px; }
-    .detail-label { font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 4px; }
-    .detail-text { font-size: 14px; }
+    .detail-row {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .detail-label {
+      font-size: 11px;
+      font-weight: var(--fw-bold);
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .detail-text {
+      font-size: var(--fs-xs);
+      line-height: var(--lh-body);
+      color: var(--text-primary);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: var(--space-48);
+      padding-top: var(--space-24);
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: var(--fs-sm);
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="brand">
-        <h1>🛡️ 렛츠인슈 (Let's Insu) <span class="badge">원장 v2.1.0</span></h1>
-        <p style="color: var(--muted); font-size: 14px; margin-top: 4px;">대한민국 전 보험사 46개년(1980~2026) 5.8만 개 전수 약관 & AI 손해사정 전문 상담 가이드</p>
+  <div class="insu-container">
+    <!-- Header -->
+    <header class="insu-header">
+      <div class="brand-area">
+        <div class="brand-icon">🛡️</div>
+        <div>
+          <div class="brand-title">
+            <span>렛츠인슈 (Let's Insu)</span>
+            <span class="lds-badge" style="background:#ecfdf5; color:#059669; border:1px solid #a7f3d0;">v3.0.0</span>
+            <span class="lds-badge" style="background:#f1f5f9; color:#475569; border:1px solid #cbd5e1;">LDS v1.0.0</span>
+          </div>
+          <div class="brand-subtitle">대한민국 전 보험사 46개년(1980~2026) 5.8만 개 전수 약관 & AI 손해사정 전문 상담 가이드</div>
+        </div>
       </div>
-      <div style="display:flex; align-items:center; gap:10px;">
-        <span class="pulse-tag">⚡ 24/7 무인 크론 가동 중</span>
-        <code style="color: var(--emerald); font-size:12px;">urn:insu:policy:*</code>
+      <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+        <span class="lds-badge" style="background:#ecfdf5; color:#059669; border:1px solid #a7f3d0; padding:6px 12px;">
+          ⚡ 24/7 무인 크론 정상 가동
+        </span>
+        <code style="color:var(--color-insu); font-size:12px; background:#f1f5f9; padding:4px 8px; border-radius:6px; font-weight:700;">urn:insu:policy:*</code>
       </div>
     </header>
 
-    <!-- 1. 실시간 수집 관제 펄스 보드 (전 분야 전수) -->
+    <!-- Pulse Panel -->
     <div class="pulse-panel">
       <div class="pulse-stat">
         <div class="pulse-label">전 분야 총 누적 약관 원장</div>
@@ -264,7 +410,7 @@
       </div>
       <div class="pulse-stat">
         <div class="pulse-label">일간 무인 수집 속도</div>
-        <div class="pulse-val">168~220 <span class="pulse-unit">건 / 일</span></div>
+        <div class="pulse-val">208 <span class="pulse-unit">건 / 일</span></div>
         <div class="pulse-rate">GitHub Actions 매일 03:00 KST 자동 실행</div>
       </div>
       <div class="pulse-stat">
@@ -277,85 +423,52 @@
         <div class="pulse-val">6,450 <span class="pulse-unit">건</span></div>
         <div class="pulse-rate">대법원 전원합의체 + 금감원 분쟁조정위 결정례</div>
       </div>
-      
-      <!-- 상태 모니터링 & 자동 대응 인디케이터 -->
-      <div class="health-bar" style="display:flex; flex-direction:column; gap:6px; align-items:stretch;">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-          <div class="status-indicator">
-            <span class="dot"></span>
-            <span id="txtInsuPulse">자가진화 감시망: HEALTHY_OPTIMAL (99.1점) — 7일 MA 188.7건/일 (무사고 43일)</span>
-          </div>
-          <div style="display:flex; gap:12px; font-size:12px;">
-            <span style="color:#34d399;">수집 기울기: <b>+25.1% ▲</b></span>
-            <span style="background:rgba(16,185,129,0.2); color:#34d399; padding:2px 8px; border-radius:4px; font-weight:700;">이상징후 0건 (정상)</span>
-          </div>
+
+      <!-- Health Strip -->
+      <div class="health-strip">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="width:8px; height:8px; border-radius:50%; background:#059669; box-shadow:0 0 6px #059669;"></span>
+          <span id="txtInsuPulse" style="font-weight:700; color:#0f172a;">
+            자가진화 감시망: HEALTHY_OPTIMAL (99.3점) — 7일 MA 198.4건/일 (무사고 44일)
+          </span>
         </div>
-        <div style="color: var(--muted); font-size:12px; border-top:1px dashed rgba(255,255,255,0.1); padding-top:6px;">
-          ⚡ <strong>무료 티어 안전망</strong>: 180일 TTL 중복 방지 필터 & ZERO_DROP / FLAT_CURVE 수집 이상징후 자가 복구 엔진 가동 (과금 0원 유지)
+        <div style="display:flex; gap:12px; font-weight:700;">
+          <span style="color:#059669;">수집 기울기: <b>+25.1% ▲</b></span>
+          <span class="lds-badge" style="background:#ecfdf5; color:#059669;">Zero-Drop 이상징후 0건 (안전)</span>
         </div>
       </div>
     </div>
 
-    <!-- 2. 서비스 기획 & 디자이너를 위한 정식 제품 스펙 가이드 -->
-    <div class="spec-panel">
-      <h3 style="font-size: 16px; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px;">
-        📌 서비스 기획 & 제품 스펙 가이드 (Product Design Specification)
-      </h3>
-      <p style="font-size: 13px; color: var(--muted); margin-top: 4px;">여러 에이전트와 디자이너가 렛츠인슈 정식 서비스 UI/UX를 기획·개발할 때 기준으로 삼는 핵심 데이터 가치와 기능 명세입니다.</p>
-
-      <div class="spec-grid">
-        <div class="spec-box">
-          <div class="spec-title">💡 우리만의 독보적인 차별화 데이터 (Moat)</div>
-          <div class="spec-desc">
-            단순 실손뿐 아니라, <strong>[화재(실손 vs 비례보상/손해방지비용), 자동차(과실비율 100:0 및 격락손해), 생명종신(2년 경과 자살면책 무효/고지의무), 일상배상책임(누수 피해 배상)]</strong> 전 영역의 시기별 약관과 법원 판례를 1:1 매핑한 <strong>"전문 손해사정 지식 엔진"</strong>을 보유합니다.
-          </div>
-        </div>
-        <div class="spec-box">
-          <div class="spec-title">🎯 타깃 유저 페르소나 및 핵심 기능</div>
-          <div class="spec-desc">
-            <strong>보험금 부지급·삭감 통보를 받은 전 국민, 전문 손해사정사, 보험설계사, 로펌 교통/보험전담팀</strong>.
-            ① 6대 보험 분야 원스톱 30초 지급 판단 및 과실비율 판정기, ② 보험사 공문 반박용 '소명서/내용증명 원클릭 생성기', ③ 병원 진단서 발급 전 필수 검토 키워드 가이드.
-          </div>
-        </div>
-        <div class="spec-box">
-          <div class="spec-title">🔗 타 패밀리 서비스와의 데이터 교류 (Federation)</div>
-          <div class="spec-desc">
-            뉴스보드(NewsBoard)의 대형 화재, 교통사고, 누수 분쟁 기사에서 <code>urn:insu:policy:...</code>를 통해 즉시 보상 약관과 연결되며, 렛츠로(Let's Law)의 대법원 판례 DB와 양방향 링크되어 법률적 배상 책임 근거를 실시간 교류합니다.
-          </div>
-        </div>
-      </div>
+    <!-- Category Chips Carousel -->
+    <div class="category-carousel" id="catCarousel">
+      <button class="cat-btn active" onclick="switchCategory('auto_insurance')">🚗 자동차보험</button>
+      <button class="cat-btn" style="border-color:#0284c7; color:#0284c7;" onclick="switchCategory('traffic_settlement')">🧮 교통사고 과실비율 & 합의금 계산기</button>
+      <button class="cat-btn" onclick="switchCategory('fire_property')">🔥 화재·누수·재산</button>
+      <button class="cat-btn" onclick="switchCategory('life_whole')">🖤 생명·종신·사망</button>
+      <button class="cat-btn" onclick="switchCategory('indemnity_health')">🏥 실손·암·질병</button>
+      <button class="cat-btn" onclick="switchCategory('liability')">🛡️ 일상생활배상(일배책)</button>
     </div>
 
-    <!-- 3. 메인 인터랙티브 작업 영역: 6대 분야 전문 손해사정 AI 상담 -->
-    <div class="grid">
-      <!-- 좌측: 전문 손해사정 시뮬레이터 -->
-      <div class="card">
+    <!-- Main Grid -->
+    <div class="insu-grid">
+      <!-- Left: Consultation / Settlement Simulator -->
+      <div class="insu-card">
         <h2>🩺 6대 분야 전문 보험금 상담 & 면책 반박기</h2>
-        
-        <div class="category-chips" id="catChips">
-          <button class="cat-btn active" onclick="switchCategory('auto_insurance')">🚗 자동차보험</button>
-          <button class="cat-btn" style="border-color:var(--cyan); color:var(--cyan);" onclick="switchCategory('traffic_settlement')">🧮 교통사고 과실비율 & 합의금 계산기</button>
-          <button class="cat-btn" onclick="switchCategory('fire_property')">🔥 화재·누수·재산</button>
-          <button class="cat-btn" onclick="switchCategory('life_whole')">🖤 생명·종신·사망</button>
-          <button class="cat-btn" onclick="switchCategory('indemnity_health')">🏥 실손·암·질병</button>
-          <button class="cat-btn" onclick="switchCategory('liability')">🛡️ 일상생활배상(일배책)</button>
-        </div>
 
         <div class="form-group" id="grpScenario">
           <label id="lblScenario">분쟁 시나리오 선택</label>
-          <select id="selScenario" onchange="renderScenarioDetail()"></select>
+          <select id="selScenario" class="lds-select" onchange="renderScenarioDetail()"></select>
         </div>
 
-        <!-- 손해사정 지급 승소 확률 게이지 -->
         <div class="gauge-container" id="grpGauge">
           <div style="display:flex; justify-content:space-between; font-size:13px;">
-            <span style="font-weight:700;">소비자 보험금 전액 수령 확률</span>
-            <span style="color:var(--emerald); font-weight:800;" id="txtProb">92% (승소 유력)</span>
+            <span style="font-weight:700; color:var(--text-primary);">소비자 보험금 전액 수령 확률</span>
+            <span style="color:#059669; font-weight:800;" id="txtProb">92% (승소 유력)</span>
           </div>
           <div class="gauge-bar-bg">
             <div class="gauge-bar-fill" id="barFill" style="width: 92%;"></div>
           </div>
-          <div style="font-size:11px; color:var(--muted);">대법원 확정 판례 및 상법 제680조·약관 불이익 원칙 적용 기준</div>
+          <div style="font-size:11px; color:var(--text-muted);">대법원 확정 판례 및 상법 제680조·약관 불이익 원칙 적용 기준</div>
         </div>
 
         <div class="warning-box" id="boxWarning">
@@ -368,25 +481,25 @@
 
         <div class="defense-box" id="boxDefense">
           <div class="defense-title">💡 소비자 승소 방어 전략 & 필수 제출 서류</div>
-          <p id="defenseText" style="font-size: 14px; white-space: pre-line;"></p>
+          <p id="defenseText" style="font-size:13px; color:#064e3b; line-height:1.6; white-space:pre-line;"></p>
         </div>
 
-        <!-- 교통사고 합의금 계산기 패널 -->
+        <!-- Traffic Settlement Calculator -->
         <div id="trafficSettlementPanel" style="display:none;">
-          <div style="background:rgba(6,182,212,0.1); border:1px solid var(--cyan); border-radius:10px; padding:16px; margin-bottom:14px;">
-            <div style="font-weight:800; color:var(--cyan); margin-bottom:4px; font-size:15px;">🚗 한문철식 과실비율 & 합의금 산출 엔진</div>
-            <div style="font-size:12px; color:#cbd5e1;">대법원 판례 및 자동차보험 표준약관(지급기준)에 따른 위자료, 휴업손해(85%), 향후치료비 정밀 시뮬레이션</div>
+          <div style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:var(--radius-md); padding:var(--space-16); margin-bottom:var(--space-16);">
+            <div style="font-weight:800; color:#0369a1; margin-bottom:4px; font-size:15px;">🚗 한문철식 과실비율 & 합의금 산출 엔진</div>
+            <div style="font-size:12px; color:#334155; line-height:1.5;">대법원 판례 및 자동차보험 표준약관(지급기준)에 따른 위자료, 휴업손해(85%), 향후치료비 정밀 시뮬레이션</div>
           </div>
 
           <div class="form-group">
-            <label>1. 본인 과실비율: <b id="lblMyFault" style="color:var(--amber);">30%</b> (상대 과실: <b id="lblOtherFault" style="color:var(--cyan);">70%</b>)</label>
+            <label>1. 본인 과실비율: <b id="lblMyFault" style="color:#d97706;">30%</b> (상대 과실: <b id="lblOtherFault" style="color:#0284c7;">70%</b>)</label>
             <input type="range" id="rngFault" min="0" max="100" value="30" step="5" style="width:100%;" oninput="calcSettlement()">
           </div>
 
           <div class="form-group" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
             <div>
               <label>2. 상해 급수 (부상 정도)</label>
-              <select id="selInjuryGrade" onchange="calcSettlement()">
+              <select id="selInjuryGrade" class="lds-select" onchange="calcSettlement()">
                 <option value="15">12~14급 (염좌/타박상 전치 2~3주 - 위자료 15만)</option>
                 <option value="50">9~11급 (골절/파열 전치 4~6주 - 위자료 50만)</option>
                 <option value="120">5~8급 (중상해/수술 전치 8~12주 - 위자료 120만)</option>
@@ -395,42 +508,47 @@
             </div>
             <div>
               <label>3. 월 평균 소득 (세전)</label>
-              <input type="number" id="inpIncome" value="3500000" step="100000" oninput="calcSettlement()">
+              <input type="number" id="inpIncome" class="lds-input-field" value="3500000" step="100000" oninput="calcSettlement()">
             </div>
           </div>
 
           <div class="form-group" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
             <div>
               <label>4. 입원 일수 (일)</label>
-              <input type="number" id="inpInpatient" value="7" min="0" max="365" oninput="calcSettlement()">
+              <input type="number" id="inpInpatient" class="lds-input-field" value="7" min="0" max="365" oninput="calcSettlement()">
             </div>
             <div>
               <label>5. 통원 일수 (일)</label>
-              <input type="number" id="inpOutpatient" value="14" min="0" max="365" oninput="calcSettlement()">
+              <input type="number" id="inpOutpatient" class="lds-input-field" value="14" min="0" max="365" oninput="calcSettlement()">
             </div>
           </div>
 
-          <!-- 실시간 합의금 산출 결과 -->
-          <div style="background:rgba(0,0,0,0.45); border:1px solid rgba(16,185,129,0.3); border-radius:10px; padding:16px; margin-top:14px;">
-            <div style="font-size:12px; color:var(--muted); font-weight:600;">과실상계 후 총 예상 실수령 합의금</div>
-            <div style="font-size:26px; font-weight:800; color:var(--emerald); margin:6px 0;" id="txtTotalSettlement">2,380,000 원</div>
-            <div style="font-size:12px; color:#cbd5e1; line-height:1.6;" id="txtSettlementBreakdown"></div>
-            <a href="https://pyw31337.github.io/law/" target="_blank" style="display:block; text-align:center; margin-top:12px; background:linear-gradient(135deg, rgba(59,130,246,0.2), rgba(37,99,235,0.25)); border:1px solid var(--primary); color:#93c5fd; padding:8px; border-radius:6px; font-weight:700; font-size:12px; text-decoration:none;">
+          <!-- Realtime Settlement Result -->
+          <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:var(--radius-md); padding:var(--space-16); margin-top:var(--space-16);">
+            <div style="font-size:12px; color:var(--text-muted); font-weight:700;">과실상계 후 총 예상 실수령 합의금</div>
+            <div style="font-size:28px; font-weight:800; color:#059669; margin:6px 0;" id="txtTotalSettlement">2,380,000 원</div>
+            <div style="font-size:12px; color:var(--text-secondary); line-height:1.6;" id="txtSettlementBreakdown"></div>
+            <a href="https://pyw31337.github.io/law/" target="_blank" class="lds-btn lds-btn-secondary" style="width:100%; margin-top:14px; font-size:13px; color:#2563eb; border-color:#bfdbfe; background:#eff6ff;">
               ⚖️ 렛츠로(Let's Law) 3D 현장 시뮬레이터 & 한문철식 과실비율 평가기 바로가기
             </a>
           </div>
         </div>
       </div>
 
-      <!-- 우측: 시기별 표준약관 & 분쟁조정례 아카이브 -->
-      <div class="card">
+      <!-- Right: Policy Archive -->
+      <div class="insu-card">
         <h2>📜 46개년(1980~2026) 약관 아카이브</h2>
-        <div class="policy-tabs" id="tabContainer"></div>
+        <div class="policy-tabs-wrap" id="tabContainer"></div>
         <div class="detail-card" id="detailCard">
-          <p style="color: var(--muted)">약관 데이터를 로드하는 중입니다...</p>
+          <p style="color: var(--text-muted)">약관 데이터를 로드하는 중입니다...</p>
         </div>
       </div>
     </div>
+
+    <footer>
+      <p>© 2026 렛츠인슈 (Let's Insu) — pyw31337 Autonomous InsurTech Ecosystem</p>
+      <p style="margin-top:6px; font-size:12px;">LDS v1.0.0 Light Theme System · 8-Point Grid Spacing · 100% Zero Cost Cloud-Free Guarantee</p>
+    </footer>
   </div>
 
   <script>
@@ -487,22 +605,15 @@
       document.getElementById('lblMyFault').textContent = `${myFault}%`;
       document.getElementById('lblOtherFault').textContent = `${100 - myFault}%`;
 
-      const baseInjuryVal = parseInt(document.getElementById('selInjuryGrade').value) * 10000; // 위자료 기본
+      const baseInjuryVal = parseInt(document.getElementById('selInjuryGrade').value) * 10000;
       const monthlyIncome = parseFloat(document.getElementById('inpIncome').value) || 3500000;
       const dailyIncome = monthlyIncome / 30;
       const inDays = parseInt(document.getElementById('inpInpatient').value) || 0;
       const outDays = parseInt(document.getElementById('inpOutpatient').value) || 0;
 
-      // 1. 위자료 (과실상계 적용)
       const adjustedInjury = Math.round(baseInjuryVal * otherRatio);
-
-      // 2. 휴업손해 (입원일수 * 일소득 * 85% * 과실상계)
       const lostWages = Math.round(inDays * dailyIncome * 0.85 * otherRatio);
-
-      // 3. 통원교통비 (1일 8,000원 * 과실상계)
       const transport = Math.round(outDays * 8000 * otherRatio);
-
-      // 4. 향후치료비 추정액 (부상등급과 입통원 감안 표준치)
       const futureMed = Math.round((baseInjuryVal * 1.8 + inDays * 120000 + outDays * 45000) * otherRatio);
 
       const total = adjustedInjury + lostWages + transport + futureMed;
@@ -540,7 +651,6 @@
       document.getElementById('boxPrecedent').innerHTML = `⚖️ <strong>대법원 판례 & 법리 근거</strong>: ${s.legal_precedent}`;
       document.getElementById('defenseText').textContent = s.consumer_strategy;
 
-      // 게이지 연산
       const prob = (currentCat === 'life_whole' || currentCat === 'fire_property') ? 95 : 88;
       document.getElementById('txtProb').textContent = `${prob}% (승소 유력)`;
       document.getElementById('barFill').style.width = `${prob}%`;
@@ -549,12 +659,12 @@
     function renderBaseTabs() {
       const tc = document.getElementById('tabContainer');
       tc.innerHTML = basePolicies.map((p, idx) => `
-        <button class="tab-btn ${idx === 0 ? 'active' : ''}" onclick="selectBaseTab(${idx})">${p.category.split(' ')[0]}</button>
+        <button class="policy-tab-chip ${idx === 0 ? 'active' : ''}" onclick="selectBaseTab(${idx})">${p.category.split(' ')[0]}</button>
       `).join('');
     }
 
     function selectBaseTab(idx) {
-      document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+      document.querySelectorAll('.policy-tab-chip').forEach((b, i) => b.classList.toggle('active', i === idx));
       showBaseDetail(idx);
     }
 
@@ -564,23 +674,23 @@
       document.getElementById('detailCard').innerHTML = `
         <div class="detail-row">
           <div class="detail-label">적용 시기 & 대상 보험사</div>
-          <div class="detail-text" style="color:var(--emerald); font-weight:700;">${p.category} (${p.effective_period || '전 기간'})</div>
-          <div style="font-size:12px; color:var(--muted);">${p.insurer_coverage || ''}</div>
+          <div class="detail-text" style="color:#059669; font-weight:800;">${p.category} (${p.effective_period || '전 기간'})</div>
+          <div style="font-size:12px; color:var(--text-muted);">${p.insurer_coverage || ''}</div>
         </div>
         <div class="detail-row">
           <div class="detail-label">핵심 보장 내용</div>
           <div class="detail-text">${p.key_coverage || ''}</div>
         </div>
         <div class="detail-row">
-          <div class="detail-label" style="color:#fda4af;">보험사 면책 주장 논리</div>
-          <div class="detail-text" style="color:#fca5a5;">${p.insurer_defense || ''}</div>
+          <div class="detail-label" style="color:#b91c1c;">보험사 면책 주장 논리</div>
+          <div class="detail-text" style="color:#b91c1c;">${p.insurer_defense || ''}</div>
         </div>
         <div class="detail-row">
-          <div class="detail-label" style="color:var(--cyan);">대법원 승소 판례 & 금감원 조정례</div>
+          <div class="detail-label" style="color:#2563eb;">대법원 승소 판례 & 금감원 조정례</div>
           <div class="detail-text">${p.court_precedent || ''}</div>
         </div>
         <div class="detail-row">
-          <div class="detail-label" style="color:var(--amber);">소비자 부지급 방어 가이드</div>
+          <div class="detail-label" style="color:#d97706;">소비자 부지급 방어 가이드</div>
           <div class="detail-text" style="white-space:pre-line;">${p.consumer_defense || ''}</div>
         </div>
       `;
@@ -588,6 +698,5 @@
 
     loadData();
   </script>
-<script src="https://pyw31337.github.io/lets/js/lets-design-system.js?v=1.1.0" defer></script><script>addEventListener('load',()=>navigator.serviceWorker?.register('./sw.js').catch(()=>{}));</script>
 </body>
 </html>
