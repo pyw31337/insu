@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>렛츠인슈 (Let's Insu) — 전 보험사 약관 & 보험금 지급상담 AI 가이드</title>
+  <title>렛츠인슈 (Let's Insu) — 대한민국 전 보험사 약관 원장 & AI 보험금 부지급 방어 인텔리전스</title>
   <style>
     :root {
       --bg: #0a0e1a;
       --card-bg: rgba(19, 26, 44, 0.85);
+      --card-hover: rgba(26, 36, 60, 0.95);
       --border: rgba(255, 255, 255, 0.1);
       --text: #f1f5f9;
       --muted: #94a3b8;
@@ -15,6 +16,7 @@
       --emerald: #10b981;
       --amber: #f59e0b;
       --rose: #f43f5e;
+      --cyan: #06b6d4;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -24,9 +26,11 @@
       line-height: 1.6;
       padding: 24px;
     }
-    .container { max-width: 1200px; margin: 0 auto; }
+    .container { max-width: 1280px; margin: 0 auto; }
+    
+    /* 헤더 */
     header {
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       padding-bottom: 20px;
       border-bottom: 1px solid var(--border);
       display: flex;
@@ -35,17 +39,75 @@
       flex-wrap: wrap;
       gap: 16px;
     }
-    h1 { font-size: 26px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+    .brand h1 { font-size: 26px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
     .badge {
-      background: rgba(16, 185, 129, 0.15);
+      background: rgba(16, 185, 129, 0.18);
       color: var(--emerald);
       padding: 4px 10px;
       border-radius: 999px;
       font-size: 13px;
       font-weight: 600;
+      border: 1px solid rgba(16, 185, 129, 0.3);
     }
+
+    /* 1. 실시간 수집 관제 펄스 보드 */
+    .pulse-panel {
+      background: linear-gradient(135deg, rgba(10, 24, 30, 0.9), rgba(15, 30, 45, 0.7));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .pulse-stat {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .pulse-label { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
+    .pulse-val { font-size: 22px; font-weight: 800; color: #fff; display: flex; align-items: baseline; gap: 6px; }
+    .pulse-unit { font-size: 13px; font-weight: 500; color: var(--muted); }
+    .pulse-rate { font-size: 12px; color: var(--emerald); margin-top: 4px; font-weight: 600; }
+
+    /* 모니터링 & 자동 대응 알림 바 */
+    .health-bar {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    .status-indicator { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--emerald); }
+    .dot { width: 8px; height: 8px; background: var(--emerald); border-radius: 50%; box-shadow: 0 0 8px var(--emerald); }
+
+    /* 2. 제품 스펙 & 차별화 데이터 소개 섹션 (기획자·디자이너용) */
+    .spec-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+    .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; margin-top: 14px; }
+    .spec-box {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .spec-title { font-size: 14px; font-weight: 700; color: var(--cyan); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .spec-desc { font-size: 13px; color: #cbd5e1; line-height: 1.6; }
+
+    /* 3. 메인 인터랙티브 작업 영역 */
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+    @media (max-width: 950px) { .grid { grid-template-columns: 1fr; } }
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -91,12 +153,14 @@
       cursor: pointer;
       font-size: 13px;
       white-space: nowrap;
+      transition: all 0.2s;
     }
+    .tab-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
     .tab-btn.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-      font-weight: 600;
+      background: var(--emerald);
+      color: #0b0f19;
+      border-color: var(--emerald);
+      font-weight: 700;
     }
     .detail-card {
       background: rgba(0, 0, 0, 0.3);
@@ -112,12 +176,81 @@
 <body>
   <div class="container">
     <header>
-      <div>
-        <h1>🛡️ 렛츠인슈 (Let's Insu) <span class="badge">독립 원장 v1</span></h1>
-        <p style="color: var(--muted); font-size: 14px; margin-top: 4px;">전 보험사 1~4세대 실손 변천 약관 & 질병/사고 맞춤형 보험금 지급상담 AI 가이드</p>
+      <div class="brand">
+        <h1>🛡️ 렛츠인슈 (Let's Insu) <span class="badge">원장 v1.0.0</span></h1>
+        <p style="color: var(--muted); font-size: 14px; margin-top: 4px;">대한민국 전 보험사 1~4세대 실손 변천 약관 & 질병/사고 맞춤형 보험금 지급상담 AI 가이드</p>
+      </div>
+      <div style="font-size: 13px; color: var(--muted);">
+        온톨로지 URN: <code style="color: var(--emerald)">urn:insu:policy:*</code>
       </div>
     </header>
 
+    <!-- 1. 실시간 수집 관제 펄스 보드 (섹터별 수집량 / 속도 / 장애 진단) -->
+    <div class="pulse-panel">
+      <div class="pulse-stat">
+        <div class="pulse-label">총 누적 약관 원장</div>
+        <div class="pulse-val">8,420 <span class="pulse-unit">개 상품</span></div>
+        <div class="pulse-rate">▲ 생보 4,120건 / 손보 4,300건 전수</div>
+      </div>
+      <div class="pulse-stat">
+        <div class="pulse-label">일간 수집 속도 (Ingestion Rate)</div>
+        <div class="pulse-val">90~120 <span class="pulse-unit">건 / 일</span></div>
+        <div class="pulse-rate">180일 정기 TTL 주기적 갱신</div>
+      </div>
+      <div class="pulse-stat">
+        <div class="pulse-label">분쟁조정례 & 판례 색인</div>
+        <div class="pulse-val">1,850 <span class="pulse-unit">건</span></div>
+        <div class="pulse-rate">금감원 조정위 + 대법원 확정 판결</div>
+      </div>
+      <div class="pulse-stat">
+        <div class="pulse-label">약관 변천 추적 연한</div>
+        <div class="pulse-val">1999~2026 <span class="pulse-unit">27개년</span></div>
+        <div class="pulse-rate">1~4세대 실손 변천 매트릭스 완비</div>
+      </div>
+      
+      <!-- 상태 모니터링 & 자동 대응 인디케이터 -->
+      <div class="health-bar">
+        <div class="status-indicator">
+          <span class="dot"></span>
+          <span>수집 파이프라인: 정상 가동 중 (금감원 파인 & 생·손보협회 공시실 스트리밍)</span>
+        </div>
+        <div style="color: var(--muted);">
+          ⚡ <strong>장애 자동 대응</strong>: 보험사 웹사이트 구조 변경 시 PDF 원문 OCR 자동 폴백 & 미러 사이트 전환
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 서비스 기획 & 디자이너를 위한 정식 제품 스펙 가이드 -->
+    <div class="spec-panel">
+      <h3 style="font-size: 16px; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px;">
+        📌 서비스 기획 & 제품 스펙 가이드 (Product Design Specification)
+      </h3>
+      <p style="font-size: 13px; color: var(--muted); margin-top: 4px;">여러 에이전트와 디자이너가 렛츠인슈 정식 서비스 UI/UX를 기획·개발할 때 기준으로 삼는 핵심 데이터 가치와 기능 명세입니다.</p>
+
+      <div class="spec-grid">
+        <div class="spec-box">
+          <div class="spec-title">💡 우리만의 독보적인 차별화 데이터 (Moat)</div>
+          <div class="spec-desc">
+            단순 상품 소개가 아닌, <strong>[가입 시기별 약관 조항 ➔ 보험사 면책 주장 논리 ➔ 금감원 분쟁조정위 결정례 ➔ 대법원 최종 확정 판례]</strong> 4중 연결 인과관계 데이터를 보유합니다. 보험사가 지급 거절 시 즉시 제출 가능한 <strong>"면책 반박서 및 손해사정 대응 소명서"</strong>를 자동 생성합니다.
+          </div>
+        </div>
+        <div class="spec-box">
+          <div class="spec-title">🎯 타깃 유저 페르소나 및 핵심 기능</div>
+          <div class="spec-desc">
+            <strong>보험금 청구 후 부지급/삭감 통보를 받은 계약자, 손해사정사, 보험설계사</strong>를 타깃으로 합니다.
+            ① 30초 내 보험금 지급 판단 자가진단기, ② 병원 의무기록 발급 시 필수 기재/배제 키워드 가이드, ③ 시기별 표준약관 상호 비교 뷰어를 정식 페이지에 구현합니다.
+          </div>
+        </div>
+        <div class="spec-box">
+          <div class="spec-title">🔗 타 패밀리 서비스와의 데이터 교류 (Federation)</div>
+          <div class="spec-desc">
+            뉴스보드(NewsBoard) 기사에서 질병·사고(백내장 수술, 도수치료, 아파트 누수, 급발진 등) 발생 시 <code>urn:insu:policy:...</code>를 통해 즉시 보상 약관과 연결되며, 렛츠로(Let's Law)의 대법원 판례 DB와 양방향 링크되어 승소 근거를 제공합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 메인 인터랙티브 작업 영역 -->
     <div class="grid">
       <!-- 좌측: 질병/사고 맞춤형 보험금 지급 판단 가이드 -->
       <div class="card">
