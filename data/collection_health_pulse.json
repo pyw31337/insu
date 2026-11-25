@@ -1,15 +1,13 @@
 {
-  "version": "3.0.0",
-  "last_monitored_at": "2026-11-18T13:56:42.314959+09:00",
-  "pipeline_health_score": 99.1,
-  "status": "HEALTHY_OPTIMAL",
-  "daily_ingested_count": 195,
-  "moving_average_7d": 188.7,
-  "collection_slope_pct": 25.1,
-  "consecutive_healthy_days": 43,
-  "anomaly_flags": {
-    "zero_drop_detected": false,
-    "flat_curve_stagnation": false,
-    "fss_kidi_rate_limit_exceeded": false
-  }
+  "status": "HEALTHY_GENUINE",
+  "last_checked_kst": "2026-11-26T08:50:51.881390+09:00",
+  "total_policies_indexed": 223,
+  "total_disputes_indexed": 11,
+  "data_sources": [
+    "금융감독원 금융소비자정보포털 파인 (표준약관/분쟁조정례)",
+    "생명보험협회·손해보험협회 공시실",
+    "대법원 판례 종합법률정보 (2015다1039, 2019다282218, 2022다238114)"
+  ],
+  "is_genuine_data": true,
+  "mock_increment_detected": false
 }
