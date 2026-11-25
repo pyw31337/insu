@@ -1,7 +1,7 @@
 {
   "schema": "lets_observability_v1",
-  "run_id": "insu-20261124T034429Z",
-  "observed_at": "2026-11-24T03:44:29.271233+00:00",
+  "run_id": "insu-20261125T015142Z",
+  "observed_at": "2026-11-25T01:51:42.418654+00:00",
   "service_id": "insu",
   "source": "persisted_policy_ledger",
   "stages": {
