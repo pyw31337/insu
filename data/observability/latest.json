@@ -1,13 +1,13 @@
 {
   "schema": "lets_observability_v1",
-  "run_id": "insu-20261125T015142Z",
-  "observed_at": "2026-11-25T01:51:42.418654+00:00",
+  "run_id": "insu-20261126T012752Z",
+  "observed_at": "2026-11-26T01:27:52.351730+00:00",
   "service_id": "insu",
   "source": "persisted_policy_ledger",
   "stages": {
     "collect": {
       "status": "success",
-      "ok": 7,
+      "ok": 11,
       "artifact": true
     },
     "analyze": {
@@ -24,10 +24,10 @@
     }
   },
   "counts": {
-    "records": 7
+    "records": 11
   },
   "artifacts": {
-    "ledger": "558338be1c6eb7afc13e1193f4421a3a5fb489a21c276cc5ea0438eec2bcd611"
+    "ledger": "ca9cda11aae3242419cfddc989d922a105c63277e3bbbf5c87e3e6693532eecf"
   },
   "note": "Persisted insurance policy ledger snapshot; no daily increment inferred."
 }
